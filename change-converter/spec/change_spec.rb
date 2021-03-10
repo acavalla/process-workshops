@@ -28,6 +28,10 @@ describe Change do
           expect(subject.convert(99.00)).to eq ["£50", "£20","£20","£5","£2","£2"]
         end
       end
+
+      context 'pounds and pennies' do
+        expect(subject.convert(1.01)).to eq ["£1", "1p"]
+      end
     end
   end
 end
