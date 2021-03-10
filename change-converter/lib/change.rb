@@ -1,6 +1,7 @@
 class Change
   attr_reader :result_array, :result
   DENOMS = [1, 2, 5, 10, 20, 50]
+
   def convert(amount)
     @result_array = []
     calculate_coins_notes(amount)
