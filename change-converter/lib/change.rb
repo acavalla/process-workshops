@@ -6,10 +6,7 @@ class Change
     if !amount.is_a?Integer
       pounds = amount.to_s.split(".")[0].to_i
       break_down(pounds)
-      @result.each do |result|
-        result_array << "£" + result.to_s
-      end
-      return result_array
+      @result.map { |note| "£" + note.to_s }
     else
       break_down(amount)
       @result.map { |coin| coin.to_s + "p"}
