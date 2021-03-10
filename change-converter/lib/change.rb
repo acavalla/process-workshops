@@ -6,7 +6,10 @@ class Change
     if !amount.is_a?Integer
       pounds = amount.to_s.split(".")[0].to_i
       break_down(pounds)
-      @result.map { |note| "£" + note.to_s }
+      pound_result = @result.map { |note| "£" + note.to_s }
+      pennies = amount.to_s.split(".")[1].to_i
+      break_down(pennies)
+      pound_result + (@result.map { |coin| coin.to_s + "p" })
     else
       break_down(amount)
       @result.map { |coin| coin.to_s + "p"}

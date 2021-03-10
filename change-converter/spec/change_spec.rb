@@ -30,7 +30,9 @@ describe Change do
       end
 
       context 'pounds and pennies' do
-        expect(subject.convert(1.01)).to eq ["£1", "1p"]
+        it 'can convert £1.01' do
+          expect(subject.convert(1.01)).to eq ["£1", "1p"]
+        end
       end
     end
   end
