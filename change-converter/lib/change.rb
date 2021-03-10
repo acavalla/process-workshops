@@ -12,11 +12,11 @@ class Change
       return result_array
     else
       break_down(amount)
-      @result.map |coin| { coin.to_s + "p" }
-
-      return result
+      @result.map { |coin| coin.to_s + "p"}
     end
   end
+
+  private
 
   def break_down(amount)
     @result = []
