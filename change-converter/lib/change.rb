@@ -1,34 +1,31 @@
 class Change
-  attr_reader :result
+  attr_reader :result_array, :result
   DENOMS = [1, 2, 5, 10, 20, 50]
   def convert(amount)
-    result_array = []
-    if !amount.is_a?Integer
-      pounds = amount.to_s.split(".")[0].to_i
-      break_down(pounds)
-      pound_result = @result.map { |note| "£" + note.to_s }
-      pennies = amount.to_s.split(".")[1].to_i
-      break_down(pennies)
-      pound_result + (@result.map { |coin| coin.to_s + "p" })
-    else
-      break_down(amount)
-      @result.map { |coin| coin.to_s + "p"}
-    end
-  end
+    @result_array = []
+      amount.to_s.split(".").each_with_index do |amount, index|
+        if amount.to_i != 0
+          break_down(amount.to_i)
+          @result_array << @result
+        else
+          @result_array << []
+        end
+      end
 
-  private
+      if result_array.length == 1
+        @result_array.map { |array| array.map { |coin| coin.to_s + "p"} }[0]
+      else
+        @result_array[0].map { |note| "£" + note.to_s } + @result_array[1].map { |coin| coin.to_s + "p" }
+      end
+  end
 
   def break_down(amount)
     @result = []
     DENOMS.reverse_each do |coin|
       if amount >= coin
-        (amount/coin).times { result << coin }
+        (amount/coin).times { @result << coin }
         amount -= (amount/coin) * coin
       end
     end
   end
 end
-
-# pound_denoms.reverse_each do |pound|
-# => if amount > pound
-        # result_array < amount/pound
