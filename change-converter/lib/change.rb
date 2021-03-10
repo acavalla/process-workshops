@@ -12,10 +12,9 @@ class Change
       return result_array
     else
       break_down(amount)
-      @result.each do |coin|
-        result_array << coin.to_s + "p"
-      end
-      return result_array
+      @result.map |coin| { coin.to_s + "p" }
+
+      return result
     end
   end
 
