@@ -3,16 +3,8 @@ class Change
   DENOMS = [1, 2, 5, 10, 20, 50]
   def convert(amount)
     @result_array = []
-      amount.to_s.split(".").each_with_index do |amount, index|
-        if amount.to_i != 0
-          break_down(amount.to_i)
-          result_array << result
-        else
-          result_array << []
-        end
-      end
-
-      format_convert
+    calculate_coins_notes(amount)
+    format_convert
   end
 
   private
@@ -40,6 +32,17 @@ class Change
       result_array.map { |array| penny_stringify(array) }[0]
     else
       pound_stringify + penny_stringify(result_array[1])
+    end
+  end
+
+  def calculate_coins_notes(amount)
+    amount.to_s.split(".").each_with_index do |amount, index|
+      if amount.to_i != 0
+        break_down(amount.to_i)
+        result_array << result
+      else
+        result_array << []
+      end
     end
   end
 end
